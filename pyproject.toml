@@ -23,7 +23,8 @@ all = [
 tests = [
     "pytest",
     "pytest-cov",
-    "pytest-html"
+    "pytest-html",
+    "pytest-md-report"
 ]
 api = [
     "pdoc3"
