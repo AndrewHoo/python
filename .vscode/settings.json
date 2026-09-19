@@ -1,0 +1,25 @@
+{
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit",
+        "source.unusedImports": "explicit",
+    },
+    "files.trimTrailingWhitespace": true,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "python.testing.pytestArgs": [
+        "tests",
+        "-s",
+        "-vv"
+    ],
+    "isort.args": [
+        "--profile",
+        "black"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "[json][jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    }
+}

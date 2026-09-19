@@ -1,0 +1,13 @@
+# https://coverage.readthedocs.io/en/latest/config.html
+
+[run]
+source = src
+
+[report]
+include_namespace_packages = True
+
+[html]
+directory = pytest/htmlcov
+
+[xml]
+output = pytest/coverage.xml
