@@ -1,0 +1,76 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
+
+name: Python application
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.12"
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        python -m venv .venv
+        source .venv/bin/activate
+        pip install -e .[all]
+        
+    - name: Lint with ruff
+      continue-on-error: true
+      run: |
+        ./scripts/lint.sh
+    
+    - name: Archive lint results
+      uses: actions/upload-artifact@v4
+      with:
+        name: ruff
+        path: ruff
+        
+    - name: build
+      run: |
+        ./scripts/build.sh
+        
+    - name: Test with pytest
+      id: test
+      continue-on-error: true
+      run: |
+        ./scripts/test.sh
+        
+    - name: Archive test results
+      uses: actions/upload-artifact@v4
+      with:
+        name: pytest
+        path: pytest
+
+    - name: doc
+      run: |
+        ./scripts/doc.sh
+        
+    - name: Add Summary
+      run: |
+        cat ruff/ruff.md >> $GITHUB_STEP_SUMMARY
+        cat pytest/junit.md >> $GITHUB_STEP_SUMMARY
+        cat pytest/coverage.md >> $GITHUB_STEP_SUMMARY
+
+    - name: Fail job tests failed
+      if: always()
+      run: |
+        if [[ "${{ steps.test.outcome }}" == "failure" ]]; then
+          exit 1
+        fi
