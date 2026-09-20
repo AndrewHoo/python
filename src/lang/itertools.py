@@ -1,4 +1,4 @@
-from typing import Iterable, Optional
+from collections.abc import Iterable
 
 
 def is_iter(obj):
@@ -23,8 +23,8 @@ def is_dict(obj):
 
 
 def deep_update(
-    target: dict | list | str | int | float | complex | None,
-    source: dict | list | str | int | float | complex | None,
+    target: dict | list | str | complex | None,
+    source: dict | list | str | complex | None,
 ):
     """recursively updates two json like objects (dict, list, primitive)
 
@@ -58,7 +58,7 @@ def deep_update(
 
 
 def flatten(
-    iterable: Iterable, depth: Optional[int] = None, result: Optional[list] = None
+    iterable: Iterable, depth: int | None = None, result: list | None = None
 ) -> list:
     """flattens a list
 

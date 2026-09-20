@@ -17,8 +17,14 @@ dependencies = []
 
 [project.optional-dependencies]
 all = [
+    "python[lint]",
     "python[tests]",
     "python[api]",
+]
+lint = [
+    "ruff",
+    "ciqar",
+    "ansi2html"
 ]
 tests = [
     "pytest",
