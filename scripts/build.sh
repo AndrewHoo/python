@@ -41,7 +41,7 @@ sed -i -E "s/version = \"(.*\..*\..*)\"/version = \"\1.${date}${pre}${post}${dev
 
 pip freeze > constraints.txt
 sed -i "s/constraints.txt//" .gitignore
-pip install build
+
 python -m build
 
 git restore .gitignore pyproject.toml || true

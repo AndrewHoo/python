@@ -33,6 +33,9 @@ tests = [
     "pytest-html",
     "pytest-md-report"
 ]
+build = [
+    "build"
+]
 api = [
     "pdoc3"
 ]
