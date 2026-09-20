@@ -67,8 +67,11 @@ jobs:
 
       - name: Add Summary
         run: |
+          echo -e "# Lint\n" >> $GITHUB_STEP_SUMMARY
           cat ruff/ruff.md >> $GITHUB_STEP_SUMMARY
+          echo -e "# Test" >> $GITHUB_STEP_SUMMARY
           cat pytest/junit.md >> $GITHUB_STEP_SUMMARY
+          echo -e "# Coverage" >> $GITHUB_STEP_SUMMARY
           cat pytest/coverage.md >> $GITHUB_STEP_SUMMARY
 
       - name: Fail job tests failed
